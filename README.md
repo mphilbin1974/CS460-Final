@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Matthew Philbin
+**Student ID:** 828085252
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -17,13 +17,16 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+
+  _A single shortest-path run from $S$ tells the Torchbearer how to travel from $S$ to any relic chamber, but once at a relic chamber it has no shortest path for its next move. While the Torchbearer could move from $S$ to any relic chamber with minimal fuel loss, it would not have enough information to move from $S$ to all relic chambers (and then the exit) with minimal fuel loss._
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+  
+  _What sequence should the Torchbearer explore the relic chambers in to leave with minimal cost?_
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  
+  _Different paths that reach each relic chamber and the exit may have different overall costs and there is no greedy method to bypass a search over order by leveraging local optimality (see Part 4)_
 
 ---
 
@@ -35,8 +38,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| _Dungeon Entrance_ | _The Torchbearer must move from the Dungeon Entrance to the first Relic Chamber in the chosen sequence. Since the cost from $S$ to each $R\in M$ affects which relic chamber is chosen first, we run Dijkstra's with the Entrance as a source to find these costs_ |
+| _Relic Chamber_ | _The Torchbearer must move from each Relic Chamber to the next Relic Chamber in the chosen sequence. Since the cost from the current chamber to each other relic chamber affects which is chosen next, we run Dijkstra's with each chamber as a source to find these costs_ |
 
 ### Part 2b: Distance Storage
 
@@ -44,20 +47,20 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | _Nested Dictionary_ |
+| What the keys represent | _Outer: Source Nodes; Inner: Each possible destination_ |
+| What the values represent | _Outer: The minimal cost from the Source Node to each possible destination; Inner: The minimal cost from the Source Node to the given destination_ |
+| Lookup time complexity | $O(1)$ |
+| Why O(1) lookup is possible | _Python dictionaries are implemented via hashmaps, which use a hash function to do lookups in constant time. A nested dictionary (2-deep) lookup thus has a time complexity of $O(1) + O(1) = O(1)$._ |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** _We run Dijkstra's once per source node, so this is_ $|\text{Source Nodes}| = |M \cup \{S\}| = 1 + k \in O(k)$
+- **Cost per run:** $O(m\log{n})$
+- **Total complexity:** $O(k)(O(m\log{n})) = O(km\log{n})$
+- **Justification (one line):** _Dijkstra's runs once in $O(m\log{n})$ time from each of the $k + 1$ source nodes, giving the result._
 
 ---
 
@@ -72,10 +75,10 @@
 > Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
-  _Your answer here._
+  _The value of `dist` at that node `v` is the smallest amount of fuel the Torchbearer can burn to reach `v` from the Dungeon Entrance `x`._
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+  _The value of `dist` at that node `v` is the smallest amount of fuel the Torchbearer must burn to reach that node from the Dungeon Entrance `x` by taveling only throguh nodes `u` whose cheapest possible path is already known (i.e., `u` in `S`)._
 
 ### Part 3b: Why Each Phase Holds
 
@@ -89,6 +92,8 @@
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
   _Your answer here._
+
+For every vertex v in S, dist[v] is the true shortest-path distance from x to v. For every vertex u not in S, dist[u] is the length of the shortest discovered path from x to u whose internal vertices all lie in S.
 
 ### Part 3c: Why This Matters for the Route Planner
 

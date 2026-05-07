@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Matthew Philbin
+Student ID:   828085252
 
 INSTRUCTIONS
 ------------

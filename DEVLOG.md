@@ -1,7 +1,7 @@
 # Development Log – The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Matthew Philbin
+**Student ID:** 828085252
 
 > Instructions: Write at least four dated entries. Required entry types are marked below.
 > Two to five sentences per entry is sufficient. Write entries as you go, not all in one
@@ -10,7 +10,13 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [5/6/2026]: Initial Plan
+
+_Completed README.md parts 1, 2, and 3a; I intend to complete README.md entirely before coding so as to guarantee correctness, so implementation details are still tentative. I have identified that the problem requires knowing how to optimally get from any Source Node (Dungeon Entrance + Relic Chambers) to any other in a weighted, directed, connected graph, so I will use Dijkstra's algorithm on each source node to compute these routes and compose the problem from such. I hope to have a full implementation plan by the next entry in DEVLOG.md._
+
+---
+
+## Entry 2 – [Date]: [Short description]
 
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
@@ -19,16 +25,10 @@ _Your entry here._
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 3 – [Date]: [Short description]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
-
-_Your entry here._
-
----
-
-## Entry 3 – [Date]: [Short description]
 
 _Your entry here._
 
