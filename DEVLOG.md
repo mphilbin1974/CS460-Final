@@ -21,16 +21,16 @@ _Completed README.md parts 1, 2, and 3a; I intend to complete README.md entirely
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
 
-_Completed README.md parts 3, 4, 5, 6. The Torchbearer will find the minimal distance ordering using an exhaustive search algorithm with A* pruning to evaluate all possible orderings by considering the minimal distances between the start node, end node, and each relic chamber as determined by Dijkstra's algorithm. Orderings will then be searched exahustively using A* pruning with the following heuristic: $h(n)$ is the sum of the minimal distance to the next relic chamber and minimal distance from that relic chamber to the exit. Since all possible paths will either be searched or accurately pruned, the minimal-cost ordering will be searched and thus found. I will first implement distance precomputation ebtween important nodes using Dijkstra's algorithm; I expect to find the most difficulty in handling recursion for Dijkstra's and the exhaustive search, specifically traversing the dungeon and correctly tracking the state of visited rooms. I will create a small graph by hand to manually verify program outputs._
+_Completed README.md parts 3, 4, 5, 6. The Torchbearer will find the minimal distance ordering using an exhaustive search algorithm with A* pruning (which I know from hobby game dev) to evaluate all possible orderings by considering the minimal distances between the start node, end node, and each relic chamber as determined by Dijkstra's algorithm. Orderings will then be searched exahustively using A* pruning with the following heuristic: $h(n)$ is the sum of the minimal distance to the next relic chamber and minimal distance from that relic chamber to the exit. Since all possible paths will either be searched or accurately pruned, the minimal-cost ordering will be searched and thus found. I will first implement distance precomputation ebtween important nodes using Dijkstra's algorithm; I expect to find the most difficulty in handling recursion for Dijkstra's and the exhaustive search, specifically traversing the dungeon and correctly tracking the state of visited rooms. I will trace a small graph by hand to manually verify program outputs._
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [5/13/2026]: [Short description]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+_I had to make a number of small changes upon starting the implementation. I realized that with the whole algorithm already documented it made sense to begin with the declarative functions, so I began by implementing the main pipeline in `solve`, `precompute_distances`, and `select_sources`, and then began writing the lower-level functions. I ran into a few errors in `run_dijkstra`, mostly since I had never used the Python `heapq` module before: the syntax is a little weird to me and the tuple required for a push argument (`cost`, `node`) is the opposite order of the edge tuples (`node`, `cost`) in `graph`. I fixed these foremost by consulting the documentation and also just by unpacking edges into named variables to not deal with magic numbers in my code (which I should have done from the beginning)._
 
 ---
 
@@ -54,7 +54,7 @@ _Your entry here._
 | Part 3: Algorithm Correctness | 0.5 |
 | Part 4: Search Design | 0.25 |
 | Part 5: State and Search Space | 0.25 |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | 0.1 |
+| Part 6: Pruning | 0.5 |
+| Part 7: Implementation | 1.5 |
+| README and DEVLOG writing | 0.25 |
 | **Total** | |
