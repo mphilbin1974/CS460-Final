@@ -38,8 +38,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _Dungeon Entrance_ | _The Torchbearer must move from the Dungeon Entrance to the first Relic Chamber in the chosen sequence. Since the cost from $S$ to each $R\in M$ affects which relic chamber is chosen first, we run Dijkstra's with the Entrance as a source to find these costs_ |
-| _Relic Chamber_ | _The Torchbearer must move from each Relic Chamber to the next Relic Chamber in the chosen sequence. Since the cost from the current chamber to each other relic chamber affects which is chosen next, we run Dijkstra's with each chamber as a source to find these costs_ |
+| _Dungeon Entrance_ | _The Torchbearer must move from the Dungeon Entrance to the first Relic Chamber in the chosen sequence. Since the cost from $S$ to each $R \in M$ affects which relic chamber is chosen first, we run Dijkstra's with the Entrance as a source to find these costs._ |
+| _Relic Chamber_ | _The Torchbearer must move from each Relic Chamber to the next Relic Chamber in the chosen sequence. Since the cost from the current chamber to each other relic chamber affects which is chosen next, we run Dijkstra's with each chamber as a source to find these costs._ |
 
 ### Part 2b: Distance Storage
 

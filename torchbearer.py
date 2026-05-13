@@ -32,9 +32,17 @@ def explain_problem():
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
 
-    TODO
+    Compelte TODO
     """
-    return "TODO"
+    answers = '''
+    - **Why a single shortest-path run from S is not enough:**
+    _A single shortest-path run from $S$ tells the Torchbearer how to travel from $S$ to any relic chamber, but once at a relic chamber it has no shortest path for its next move. While the Torchbearer could move from $S$ to any relic chamber with minimal fuel loss, it would not have enough information to move from $S$ to all relic chambers (and then the exit) with minimal fuel loss._
+    - **What decision remains after all inter-location costs are known:**
+    _What sequence should the Torchbearer explore the relic chambers in to leave with minimal cost?_
+    - **Why this requires a search over orders (one sentence):**
+    _Different paths that reach each relic chamber and the exit may have different overall costs and there is no greedy method to bypass a search over order by leveraging local optimality (see Part 4)_
+    '''
+    return answers
 
 
 # =============================================================================
@@ -54,9 +62,9 @@ def select_sources(spawn, relics, exit_node):
     list[node]
         No duplicates. Order does not matter.
 
-    TODO
+    Compelete TODO
     """
-    pass
+    return [spawn] + relics.copy()
 
 
 def run_dijkstra(graph, source):
@@ -110,9 +118,29 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
-    TODO
+    Complete TODO
     """
-    return "TODO"
+    answers = '''
+    3a:
+    - **For nodes already finalized (in S):**
+    _The value of `dist` at that node `v` is the smallest amount of fuel the Torchbearer can burn to reach `v` from the Dungeon Entrance `x`._
+    - **For nodes not yet finalized (not in S):**
+    _The value of `dist` at that node `v` is the smallest amount of fuel the Torchbearer must burn to reach that node from the Dungeon Entrance `x` by taveling only throguh nodes `u` whose cheapest possible path is already known (i.e., `u` in `S`)._
+    
+    3b:
+    - **Initialization : why the invariant holds before iteration 1:**
+    _Before iteration 1, `S` is empty, `dist[x] == 0`, and `dist[y] == inf` for all `y != x`, where `inf` represents an unreachably high value; also, no paths to `x` have been discovered except for the trivial path `x -0-> x` which contains no internal vertices from `S`. Thus the invariant holds._
+
+    - **Maintenance : why finalizing the min-dist node is always correct:**
+    _Suppose the algorithm finalizes the min-dist node and then discovers a new path with less distance: this new path must take a newly discovered edge (by the meaning of discovered) in addition to the current edges, since the minimum-distance path with the current edges is already found. Since edge weights are non-negative, adding a new edge that must add a non-negative amount to distance; thus it cannot have less distance than the previous min-dist path, and so thus we have a contradiction._
+
+    - **Termination : what the invariant guarantees when the algorithm ends:**
+    _The algorithm concludes when each Relic Chamber is in `S` along with the exit node; thus the invariant implies that `dist[v]` equals the cost of the shortest-distance path from `x` to `v`, where `v` may be an arbitrary Relic Chamber or the exit node._
+
+    3c:
+    _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal fuel cost to travel between two important chambers in the dungeon; from this the Torchbearer can order relic chambers to travel between all of them with minimal total cost._
+    '''
+    return answers
 
 
 # =============================================================================
@@ -127,8 +155,34 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
-    TODO
+    Complete TODO
     """
+    answers = '''
+    - **The failure mode:**
+    _Traveling through the minimal-cost route possible to an undiscovered Relic Chamber forces the algorithm to take on later costs such that total costs are higher than a valid path from some other strategy._
+
+    - **Counter-example setup:**
+    _Consider the following adjacency list:_
+
+        `S : [(A, 1), (B, 2)]`
+    
+        `A : [(B, 10), (T, 15)]`
+    
+        `B : [(A, 1), (T, 10)]`
+    
+        `T : []`
+    
+    - **What greedy picks:**
+    _`S -1-> A -10-> B -10-> T` with total cost `1 + 10 + 10 = 21`._
+
+    - **What optimal picks:**
+    _`S -2-> B -1-> A -15-> T` with total cost `2 + 1 + 15 = 18`._
+
+    - **Why greedy loses:**
+    _Optimal picks `A` last, taking only one high-cost move by entering `T` through `A`, but Greedy chooses `A` immediately for having the minimum-distance path available; since `A` is not the last Relic Chamber, it must then take another high-cost edge to leave `A` and then another when entering `T`._
+
+    - _Any solution must traverse all the Relic Chambers in some given order before reaching the exit node, so the algorihtm must explore possible Relic Chamber orderings to produce one with minimal total fuel cost._
+    '''
     return "TODO"
 
 
@@ -210,9 +264,11 @@ def solve(graph, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
+    Complete TODO
     """
-    pass
+    dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    cost, order = find_optimal_route(dist_table, spawn, relics, exit_node)
+    return cost, order
 
 
 # =============================================================================
