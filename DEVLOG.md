@@ -16,12 +16,12 @@ _Completed README.md parts 1, 2, and 3a; I intend to complete README.md entirely
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [5/13/2026]: [Short description]
 
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
 
-_Your entry here._
+_Completed README.md parts 3, 4, 5, 6. The Torchbearer will find the minimal distance ordering using an exhaustive search algorithm with A* pruning to evaluate all possible orderings by considering the minimal distances between the start node, end node, and each relic chamber as determined by Dijkstra's algorithm. Orderings will then be searched exahustively using A* pruning with the following heuristic: $h(n)$ is the sum of the minimal distance to the next relic chamber and minimal distance from that relic chamber to the exit. Since all possible paths will either be searched or accurately pruned, the minimal-cost ordering will be searched and thus found. I will first implement distance precomputation ebtween important nodes using Dijkstra's algorithm; I expect to find the most difficulty in handling recursion for Dijkstra's and the exhaustive search, specifically traversing the dungeon and correctly tracking the state of visited rooms. I will create a small graph by hand to manually verify program outputs._
 
 ---
 
@@ -49,12 +49,12 @@ _Your entry here._
 
 | Part | Estimated Hours |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
-| Part 3: Algorithm Correctness | |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
+| Part 1: Problem Analysis | 0.25 |
+| Part 2: Precomputation Design | 0.5 |
+| Part 3: Algorithm Correctness | 0.5 |
+| Part 4: Search Design | 0.25 |
+| Part 5: State and Search Space | 0.25 |
 | Part 6: Pruning | |
 | Part 7: Implementation | |
-| README and DEVLOG writing | |
+| README and DEVLOG writing | 0.1 |
 | **Total** | |
