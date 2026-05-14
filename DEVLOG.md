@@ -3,11 +3,6 @@
 **Student Name:** Matthew Philbin
 **Student ID:** 828085252
 
-> Instructions: Write at least four dated entries. Required entry types are marked below.
-> Two to five sentences per entry is sufficient. Write entries as you go, not all in one
-> sitting. Graders check that entries reflect genuine work across multiple sessions.
-> Delete all blockquotes before submitting.
-
 ---
 
 ## Entry 1 – [5/6/2026]: Initial Plan
@@ -18,17 +13,11 @@ _Completed README.md parts 1, 2, and 3a; I intend to complete README.md entirely
 
 ## Entry 2 – [5/13/2026]: Completed Documentation
 
-> Required. Write this before writing any code. Describe your plan: what you will
-> implement first, what parts you expect to be difficult, and how you plan to test.
-
 _Completed README.md parts 3, 4, 5, 6. The Torchbearer will find the minimal distance ordering using an exhaustive search algorithm with A* pruning (which I know from hobby game dev) to evaluate all possible orderings by considering the minimal distances between the start node, end node, and each relic chamber as determined by Dijkstra's algorithm. Orderings will then be searched exahustively using A* pruning with the following heuristic: $h(n)$ is the sum of the minimal distance to the next relic chamber and minimal distance from that relic chamber to the exit. Since all possible paths will either be searched or accurately pruned, the minimal-cost ordering will be searched and thus found. I will first implement distance precomputation ebtween important nodes using Dijkstra's algorithm; I expect to find the most difficulty in handling recursion for Dijkstra's and the exhaustive search, specifically traversing the dungeon and correctly tracking the state of visited rooms. I will trace a small graph by hand to manually verify program outputs._
 
 ---
 
 ## Entry 3 – [5/13/2026]: Began Code
-
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
 
 _I had to make a number of small changes upon starting the implementation. I realized that with the whole algorithm already documented it made sense to begin with the declarative functions, so I began by implementing the main pipeline in `solve`, `precompute_distances`, and `select_sources`, and then began writing the lower-level functions. I ran into a few errors in `run_dijkstra`, mostly since I had never used the Python `heapq` module before: the syntax is a little weird to me and the tuple required for a push argument (`cost`, `node`) is the opposite order of the edge tuples (`node`, `cost`) in `graph`. I fixed these foremost by consulting the documentation and also just by unpacking edges into named variables to not deal with magic numbers in my code (which I should have done from the beginning)._
 
@@ -36,16 +25,11 @@ _I had to make a number of small changes upon starting the implementation. I rea
 
 ## Entry 4 – [5/14/2026]: Post-Implementation Reflection
 
-> Required. Written after your implementation is complete. Describe what you would
-> change or improve given more time.
-
-_With time I would be most interested to change the heuristic function to see if I can get slightly faster search times. This is because the solution is already otpimal (since the search is exhaustice), but is based on DFS, which has a drawback in that it tends to waste time exploring useless branches. So while improving the output is not possible, improving the performance may be, and the open-ended nature of choosing a heuristic makes me think I could come up with a better one with time to iterate._
+_Though I already mentioned some issues I ran into, I should note that this section of the code was much more complex. `_explore` was the only difficult function, but it took significant time and tracing by hand to implement correctly--I also dealt with repeated issues dealing with mutability in Python (due to passing multiple structures around a large recursive function), especially related to backtracking. With time I would be most interested to change the heuristic function to see if I can get slightly faster search times. This is because the solution is already optimal (since the search is exhaustive), but is based on DFS, which has a drawback in that it tends to waste time exploring useless branches. So while improving the output is not possible, improving the performance may be, and the open-ended nature of choosing a heuristic makes me think I could come up with a better one with time to iterate._
 
 ---
 
 ## Final Entry – [5/14/2026]: Time Estimate
-
-> Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
 
 | Part | Estimated Hours |
 |---|---|
@@ -58,3 +42,4 @@ _With time I would be most interested to change the heuristic function to see if
 | Part 7: Implementation | 3.5 |
 | README and DEVLOG writing | 0.25 |
 | **Total** | 6 |
+_Note: Times above are surely an underestimate. Much of this project was done between other assignments or in short periods, so accurate tracking is difficult, espcially as some sessions involved both work on this project and others._

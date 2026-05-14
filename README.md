@@ -4,17 +4,9 @@
 **Student ID:** 828085252
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
-
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
 
@@ -26,7 +18,7 @@
 
 - **Why this requires a search over orders (one sentence):**
   
-  _Different paths that reach each relic chamber and the exit may have different overall costs and there is no greedy method to bypass a search over order by leveraging local optimality (see Part 4)_
+  _Different paths that reach each relic chamber and the exit may have different overall costs and there is no greedy method to bypass a search over orders by leveraging local optimality (see Part 4)_
 
 ---
 
@@ -34,16 +26,12 @@
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
 | _Dungeon Entrance_ | _The Torchbearer must move from the Dungeon Entrance to the first Relic Chamber in the chosen sequence. Since the cost from $S$ to each $R \in M$ affects which relic chamber is chosen first, we run Dijkstra's with the Entrance as a source to find these costs._ |
 | _Relic Chamber_ | _The Torchbearer must move from each Relic Chamber to the next Relic Chamber in the chosen sequence. Since the cost from the current chamber to each other relic chamber affects which is chosen next, we run Dijkstra's with each chamber as a source to find these costs._ |
 
 ### Part 2b: Distance Storage
-
-> Fill in the table. No prose required.
 
 | Property | Your answer |
 |---|---|
@@ -55,8 +43,6 @@
 
 ### Part 2c: Precomputation Complexity
 
-> State the total complexity and show the arithmetic. Two to three lines max.
-
 - **Number of Dijkstra runs:** _We run Dijkstra's once per source node, so this is_ $|\text{Source Nodes}| = |M \cup \{S\}| = 1 + k \in O(k)$
 - **Cost per run:** $O(m\log{n})$
 - **Total complexity:** $O(k)(O(m\log{n})) = O(km\log{n})$
@@ -66,13 +52,7 @@
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
-
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
   _The value of `dist` at that node `v` is the smallest amount of fuel the Torchbearer can burn to reach `v` from the Dungeon Entrance `x`._
@@ -81,10 +61,6 @@
   _The value of `dist` at that node `v` is the smallest amount of fuel the Torchbearer must burn to reach that node from the Dungeon Entrance `x` by taveling only throguh nodes `u` whose cheapest possible path is already known (i.e., `u` in `S`)._
 
 ### Part 3b: Why Each Phase Holds
-
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
-
-For every vertex v in S, dist[v] is the true shortest-path distance from x to v. For every vertex u not in S, dist[u] is the length of the shortest discovered path from x to u whose internal vertices all lie in S.
 
 - **Initialization : why the invariant holds before iteration 1:**
   _Before iteration 1, `S` is empty, `dist[x] == 0`, and `dist[y] == inf` for all `y != x`, where `inf` represents an unreachably high value; also, no paths to `x` have been discovered except for the trivial path `x -0-> x` which contains no internal vertices from `S`. Thus the invariant holds._
@@ -97,8 +73,6 @@ For every vertex v in S, dist[v] is the true shortest-path distance from x to v.
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
-
 _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal fuel cost to travel between two important chambers in the dungeon; from this the Torchbearer can order relic chambers to travel between all of them with minimal total cost._
 
 ---
@@ -106,9 +80,6 @@ _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal
 ## Part 4: Search Design
 
 ### Why Greedy Fails
-
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
 
 - **The failure mode:**
   _Traveling through the minimal-cost route possible to an undiscovered Relic Chamber forces the algorithm to take on later costs such that total costs are higher than a valid path from some other strategy._
@@ -135,8 +106,6 @@ _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal
 
 ### What the Algorithm Must Explore
 
-> One bullet. Must use the word "order."
-
 - _Any solution must traverse all the Relic Chambers in some given order before reaching the exit node, so the algorihtm must explore possible Relic Chamber orderings to produce one with minimal total fuel cost._
 
 ---
@@ -145,9 +114,6 @@ _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal
 
 ### Part 5a: State Representation
 
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
-
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
 | Current location | `current_loc` | `node` | _Represents which room of the Dungeon the Torchbearer is in as a `node` in `G`._ |
@@ -155,8 +121,6 @@ _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal
 | Fuel cost so far | `cost_so_far` | `float` | _Represents the total fuel the Torchbearer has already spent; represented as a `float` so as to compare to the best-cost route found up to the current stage (also a `float`)._ |
 
 ### Part 5b: Data Structure for Visited Relics
-
-> Fill in the table.
 
 | Property | Your answer |
 |---|---|
@@ -168,8 +132,6 @@ _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal
 
 ### Part 5c: Worst-Case Search Space
 
-> Two bullets.
-
 - **Worst-case number of orders considered:** $O(k!)$
 
 - **Why:** _If we naively take the minimum we must check every possible valid route to ensure we have it; this is equivalent to checking every ordering of $k$ terms, which is $O(k!)$._
@@ -180,15 +142,11 @@ _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal
 
 ### Part 6a: Best-So-Far Tracking
 
-> Three bullets.
-
 - **What is tracked:** _The total fuel cost of the minimal-cost valid path (ordering) found so far._
 - **When it is used:** _When another ordering being explored passes that amount in cost, and before that ordering is expanded (before the Dungeon is explored) from that point._
 - **What it allows the algorithm to skip:** _The algorithm can skip evaluating the cost of the rest of the ordering._
 
 ### Part 6b: Lower Bound Estimation
-
-> Three bullets.
 
 - **What information is available at the current state:** _The Torchbearer's current location, the relics it has already collected, and the precomputed minimal distances between important chambers and to the exit._
 - **What the lower bound accounts for:** _Let the lower bound heuristic be the sum of the minimal distance to the next relic chamber and minimal distance from that relic chamber to the exit._
@@ -196,12 +154,11 @@ _The distances calculated in Dijkstra's algorithm give the Torchbearer's minimal
 
 ### Part 6c: Pruning Correctness
 
-> One to two bullets. Explain why pruning is safe.
-
 - _If the sum of the fuel spent so far and the lower bound heuristic is not below the minimal-cost route found so far then it cannot possibly produce a cheaper route by adding positive edges. Thus this sum indicates whether a given path may lead to a new optimal solution (by A* pruning with the given heuristic). If not, this path cannot improve the algorithm and thus may be pruned._
 
 ---
 
 ## References
 
-- _Python documentation: https://www.python.org/_
+- _Python documentation: https://www.python.org/
+  - _Used for checking built-in function syntax and the Python API; specifically used to research the `heapq` module for use in `run_dijkstra`. I did not need to verify results outside of my own code since the official documentation is very trustworthy.
