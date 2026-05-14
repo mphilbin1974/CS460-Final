@@ -32,7 +32,7 @@ def explain_problem():
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
 
-    Compelte TODO
+    Completed TODO
     """
     answers = '''
     - **Why a single shortest-path run from S is not enough:**
@@ -62,7 +62,7 @@ def select_sources(spawn, relics, exit_node):
     list[node]
         No duplicates. Order does not matter.
 
-    Compelete TODO
+    Completed TODO
     """
     return [spawn] + relics.copy()
 
@@ -137,7 +137,7 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
-    Complete TODO
+    Completed TODO
     """
     answers = '''
     3a:
@@ -174,7 +174,7 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
-    Complete TODO
+    Completed TODO
     """
     answers = '''
     - **The failure mode:**
@@ -283,7 +283,7 @@ def solve(graph, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    Complete TODO
+    Completed TODO
     """
     dist_table = precompute_distances(graph, spawn, relics, exit_node)
     cost, order = find_optimal_route(dist_table, spawn, relics, exit_node)
