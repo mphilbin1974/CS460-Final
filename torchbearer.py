@@ -88,11 +88,11 @@ def run_dijkstra(graph, source):
 
     heap = []
     heapq.heappush(heap, (0, source))
-    
+
     while heap:
         current_cost, current_node = heapq.heappop(heap)
         if current_cost > costs[current_node]:
-            continue
+            continue # skip duplciates in the heap
 
         for neighbor, edge_cost in graph[current_node]:
             new_cost = current_cost + edge_cost
