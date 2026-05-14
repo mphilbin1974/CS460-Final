@@ -16,7 +16,7 @@ _Completed README.md parts 1, 2, and 3a; I intend to complete README.md entirely
 
 ---
 
-## Entry 2 – [5/13/2026]: [Short description]
+## Entry 2 – [5/13/2026]: Completed Documentation
 
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
@@ -25,7 +25,7 @@ _Completed README.md parts 3, 4, 5, 6. The Torchbearer will find the minimal dis
 
 ---
 
-## Entry 3 – [5/13/2026]: [Short description]
+## Entry 3 – [5/13/2026]: Began Code
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
@@ -34,16 +34,16 @@ _I had to make a number of small changes upon starting the implementation. I rea
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – [5/14/2026]: Post-Implementation Reflection
 
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.
 
-_Your entry here._
+_With time I would be most interested to change the heuristic function to see if I can get slightly faster search times. This is because the solution is already otpimal (since the search is exhaustice), but is based on DFS, which has a drawback in that it tends to waste time exploring useless branches. So while improving the output is not possible, improving the performance may be, and the open-ended nature of choosing a heuristic makes me think I could come up with a better one with time to iterate._
 
 ---
 
-## Final Entry – [Date]: Time Estimate
+## Final Entry – [5/14/2026]: Time Estimate
 
 > Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
 
@@ -55,6 +55,6 @@ _Your entry here._
 | Part 4: Search Design | 0.25 |
 | Part 5: State and Search Space | 0.25 |
 | Part 6: Pruning | 0.5 |
-| Part 7: Implementation | 1.5 |
+| Part 7: Implementation | 3.5 |
 | README and DEVLOG writing | 0.25 |
-| **Total** | |
+| **Total** | 6 |

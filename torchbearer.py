@@ -229,7 +229,20 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
 
     TODO
     """
-    pass
+    best = [float('inf'), []]
+    relics_remaining = set(relics)
+    relics_visited_order = []
+    cost_so_far = 0.0
+    _explore(
+        dist_table,
+        current_loc = spawn,
+        relics_remaining = relics_remaining,
+        relics_visited_order = relics_visited_order,
+        cost_so_far = cost_so_far,
+        exit_node = exit_node,
+        best = best
+    )
+    return tuple(best)
 
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
@@ -261,7 +274,46 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    # base case
+    if not relics_remaining:
+        cost_to_exit = dist_table[current_loc][exit_node]
+        total_cost = cost_so_far + cost_to_exit
+        best_order = relics_visited_order.copy()
+        if total_cost < best[0]:
+            best[0] = total_cost
+            best[1] = best_order
+        return
+    
+    # recursion
+    for relic in list(relics_remaining):
+        # pruning
+        cost_loc_to_relic = dist_table[current_loc][relic]
+        cost_relic_to_exit = dist_table[relic][exit_node]
+        heuristic = cost_loc_to_relic + cost_relic_to_exit
+        if heuristic + cost_so_far >= best[0]:
+            '''
+            All valid routes must include this relic and the exit node; thus we set the heuristic to be the cost
+            to visit just these two chambers, which is a lower bound on the cost to exit. So the cost of all
+            possible routes must be higher than the value of heuristic + cost_so_far, so we prune any routes for
+            which this cannot be a new minimum (i.e. for which it is above the current best cost so far).
+            '''
+            continue
+        
+        # backtracking
+        relics_remaining.remove(relic)
+        relics_visited_order.append(relic)
+        new_cost_so_far = cost_so_far + cost_loc_to_relic
+        _explore(
+            dist_table = dist_table,
+            current_loc = relic,
+            relics_remaining = relics_remaining,
+            relics_visited_order = relics_visited_order,
+            cost_so_far = new_cost_so_far,
+            exit_node = exit_node,
+            best = best
+        )
+        relics_remaining.add(relic)
+        relics_visited_order.pop()
 
 
 # =============================================================================
@@ -286,6 +338,7 @@ def solve(graph, spawn, relics, exit_node):
     Completed TODO
     """
     dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    # print(dist_table)
     cost, order = find_optimal_route(dist_table, spawn, relics, exit_node)
     return cost, order
 
